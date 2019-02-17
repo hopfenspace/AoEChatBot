@@ -1,0 +1,4 @@
+{
+	"telegram-token": "<telegram token>",
+	"taunt-dir": "<folder with all taunts in ogg format and opus codec>"
+}
