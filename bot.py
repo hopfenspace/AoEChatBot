@@ -12,6 +12,8 @@ for file in os.listdir(config["taunt-dir"]):
 	taunts[num] = path
 	commands.append(str(num))
 
+commands = sorted(commands)
+
 def handleCmd(bot, update):
 	msg = update.message
 	text = msg.text.split(" ")[0][1 : ]
@@ -21,7 +23,12 @@ def handleCmd(bot, update):
 	with open(file, "rb") as fd:
 		bot.send_voice(msg.chat.id, fd)
 
+def sendCmdList(bot, update):
+	update.message.reply_text("Supported Commands: /" + ", /".join(commands))
+
 updater = Updater(config["telegram-token"])
+
+updater.dispatcher.add_handler(CommandHandler("commands", sendCmdList))
 
 for cmd in commands:
 	updater.dispatcher.add_handler(CommandHandler(cmd, handleCmd))
