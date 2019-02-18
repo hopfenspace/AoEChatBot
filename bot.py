@@ -13,12 +13,13 @@ for file in os.listdir(config["taunt-dir"]):
 	commands.append(str(num))
 
 def handleCmd(bot, update):
-	text = update.message.text.split(" ")[0][1 : ]
+	msg = update.message
+	text = msg.text.split(" ")[0][1 : ]
 	num = int(text)
 	file = taunts[num]
 
 	with open(file, "rb") as fd:
-		update.message.reply_voice(fd)
+		bot.send_voice(msg.chat.id, fd)
 
 updater = Updater(config["telegram-token"])
 
