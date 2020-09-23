@@ -16,7 +16,7 @@ commands = sorted(commands)
 
 def handleCmd(bot, update):
 	msg = update.message
-	text = msg.text.split(" ")[0][1 : ]
+	text = msg.text.split(" ")[0].split("@")[0][1 : ]
 	num = int(text)
 	file = taunts[num]
 
